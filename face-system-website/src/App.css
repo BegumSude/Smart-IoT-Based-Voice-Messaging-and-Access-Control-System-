@@ -1,0 +1,12 @@
+.user-button{
+    border-radius: 21px;
+    padding: 6px;
+    background-color: rgb(13, 14, 41);
+    color: white;
+    transition: all 1.5s;
+}
+
+.user-button:hover{
+    background-color: white;
+    color: rgb(13, 14, 41);
+}

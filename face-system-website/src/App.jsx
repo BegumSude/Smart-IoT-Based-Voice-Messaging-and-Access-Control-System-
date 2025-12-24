@@ -8,12 +8,27 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />} />
 
         {/* Protected pages */}
-        <Route path="/" element={<MainLayout />}>
-          {/* <Route path="/" element={<Dashboard />} /> */}
-        </Route>
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <MainLayout />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminRoute>
+                <MainLayout />
+              </AdminRoute>
+            </ProtectedRoute>
+          }
+        />
 
       </Routes>
     </BrowserRouter>

@@ -16,7 +16,7 @@ def get_db():
     finally:
         db.close()
 
-@router.post("/login")
+@router.post("/")
 def login(data: LoginRequest, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.username == data.username).first()
 

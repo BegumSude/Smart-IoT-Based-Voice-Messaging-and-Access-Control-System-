@@ -9,7 +9,7 @@ const LoginPage = () => {
  const handleLogin = async (e) => {
   e.preventDefault();
 
-  const res = await fetch("http://127.0.0.1:8000/auth/login", {
+  const res = await fetch("http://127.0.0.1:8000/auth/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -29,7 +29,7 @@ const LoginPage = () => {
   localStorage.setItem("token", data.access_token);
   localStorage.setItem("role", data.role);
 
-  navigate("/");
+  navigate("/home");
 };
 
   return (
