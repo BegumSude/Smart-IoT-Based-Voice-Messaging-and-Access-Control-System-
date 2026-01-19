@@ -3,6 +3,17 @@ import os
 import numpy as np
 import sqlite3
 import json
+import requests
+
+
+ESP32_IP = "10.118.163.154"
+
+def send_esp32_command(command):
+    try:
+        url = f"http://{ESP32_IP}/{command}"
+        requests.post(url, timeout=2) # 2 saniye bekle, donmasın
+    except Exception as e:
+        print(f"ESP32 connection error: {e}")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CASCADE_PATH = os.path.join(BASE_DIR, "haarcascade_frontalface_default.xml")
@@ -60,6 +71,13 @@ def recognize_from_snapshot(image_bytes: bytes):
                 print(f"Hata: {e}")
         
         conn.close()
+
+        if best_match != "UNKNOWN":
+          print(f"Kapı açılıyor: {best_match}")
+          send_esp32_command("open-door")
+        else:
+          print("Yabancı kişi, kapı kapalı.")
+          send_esp32_command("close-door")
         return best_match, min_distance
         
     return "NO_FACE", None
